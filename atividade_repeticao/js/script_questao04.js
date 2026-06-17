@@ -1,32 +1,67 @@
-//PEGAR ELEMENTOS DO DOM
-const inpuIdade = document.querySelector('#idade')
-const inputPeso = document.querySelector('#peso')
+// //PEGAR ELEMENTOS DO DOM
+const inputNome = document.querySelector('#nome')
+const inputIdade = document.querySelector('#idade')
+const inputSexo = document.querySelector('#sexo')
 const btnVerifica = document.querySelector('#btn-verifica')
 const divResultado = document.querySelector('#div-resultado')
 
-let cont12 = 0
-let contPode = 0
-let contNaoPode = 0
+let totalPessoas = 0
+let menores18 = 0
+let maiores65 = 0
+let entre18e65 = 0
+let totalF = 0
+let totalM = 0
 
 btnVerifica.addEventListener('click', (evt) => {
-    let idade = Number(inpuIdade.value)
-    let peso = Number(inputPeso.value)
+    let nome = inputNome.value
+        let idade = Number(inputIdade.value)
+            let sexo = inputSexo.value.toUpperCase().trim()
 
-    if ((idade >= 18) && (idade <= 60) && (peso > 50)) {
-        contPode++
-    } else {
-        contNaoPode++
-    }
+                // Soma +1 no total de pessoas cadastradas
+                    totalPessoas++
 
-    cont12++
+                        // Regras de IDADE (Questão 4)
+                            if (idade < 18) {
+                                    menores18++
+                                        } else if (idade > 65) {
+                                                maiores65++
+                                                    } else {
+                                                            entre18e65++
+                                                                }
 
-    if (cont12 == 4) {
-        inpuIdade.setAttribute('disabled', 'disabled')
-        inputPeso.setAttribute('disabled', 'disabled')
+                                                                    // Regras de SEXO (Questão 4)
+                                                                        if (sexo === 'FEMININO') {
+                                                                                totalF++
+                                                                                    } else if (sexo === 'MASCULINO') {
+                                                                                            totalM++
+                                                                                                }
 
-        divResultado.innerHTML = `TOTAL DE PESSOA QUE PODEM DOAR ${contPode} <br> TOTAL DE PESSOA QUE NÃO PODEM DOAR ${contNaoPode} `
-    }
+                                                                                                    // Se chegar a 20 pessoas, desativa o botão e os campos (igual o professor fez)
+                                                                                                        if (totalPessoas == 20) {
+                                                                                                                inputNome.setAttribute('disabled', 'disabled')
+                                                                                                                        inputIdade.setAttribute('disabled', 'disabled')
+                                                                                                                                inputSexo.setAttribute('disabled', 'disabled')
+                                                                                                                                        btnVerifica.setAttribute('disabled', 'disabled')
+                                                                                                                                            }
 
-    inpuIdade.value = ''
-    inputPeso.value = ''
-})
+                                                                                                                                                // Mostra os resultados na div
+                                                                                                                                                    divResultado.innerHTML = `
+                                                                                                                                                            Pessoas cadastradas: ${totalPessoas} de 20 <br><br>
+                                                                                                                                                                    a) Idade inferior a 18: ${menores18} <br>
+                                                                                                                                                                            b) Idade acima de 65: ${maiores65} <br>
+                                                                                                                                                                                    c) Entre 18 e menor que 65: ${entre18e65} <br>
+                                                                                                                                                                                            d) Feminino: ${totalF} | Masculino: ${totalM}
+                                                                                                                                                                                                `
+
+                                                                                                                                                                                                    // Limpa os campos para a próxima pessoa
+                                                                                                                                                                                                        inputNome.value = ''
+                                                                                                                                                                                                            inputIdade.value = ''
+                                                                                                                                                                                                                inputSexo.value = ''
+                                                                                                                                                                                                                })
+                                                                                                                                                                                                                
+                                
+                                                                                            
+                                                                                                                                                            
+    
+    
+
